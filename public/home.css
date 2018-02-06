@@ -1,0 +1,901 @@
+body {
+  margin: 0px;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100vw;
+  overflow: scroll;
+}
+
+.formContainer {
+  font-family: 'PT Serif', serif;
+  width: 100%;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: center;
+  background-color: white;
+  overflow: scroll;
+}
+
+.scriptureInput {
+  width: 45%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+  background-color: white;
+  border-right: 1.5px dashed black;
+}
+
+#newInputs {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+#newInputs2 {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+h4 {
+  margin-left: 15px;
+}
+
+.insideForm {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.rowInput {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+#addToForm {
+  display: flex;
+  flex-flow: row wrap;
+  width: 10%;
+  height: 20px;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: 12px;
+  background-color: #3D4E6F;
+  font-family: 'PT Serif', serif;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+}
+
+#addToForm:hover {
+  background-color: #151d2d;
+}
+
+.newScript {
+  height: 20px;
+  width: 70%;
+  border: solid black 1px;
+  font-size: 15px;
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.newScript2 {
+  height: 20px;
+  width: 20%;
+  min-width: 100px;
+  font-size: 15px;
+  margin-left: 20px;
+}
+
+.newScript3 {
+  min-height: 100px;
+  min-width: 285px;
+  max-height: 150px;
+  max-width: 300px;
+  min-width: 100px;
+  font-size: 15px;
+  margin-left: 20px;
+}
+
+.sanserif{
+  font-family: serif;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+.labelContainer {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 90%;
+}
+
+.btn09 {
+  min-height: 30px;
+  display: flex;
+  flex-flow: row wrap;
+  width: 70%;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: 12px;
+  background-color: #3D4E6F;
+  font-family: 'PT Serif', serif;
+  color: white;
+  cursor: pointer;
+}
+
+.btn09:hover {
+
+  background-color: #151d2d;
+
+}
+
+.quoteInput {
+  width: 45%;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-around;
+  align-items: flex-start;
+  background-color: white;
+}
+
+#controls {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  align-items: center;
+  width: 90%;
+}
+
+.btn {
+  min-height: 30px;
+  display: flex;
+  flex-flow: row wrap;
+  width: 100%;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: 12px;
+  background-color: #3D4E6F;
+  font-family: 'PT Serif', serif;
+  color: white;
+  cursor: pointer;
+}
+
+.btn:hover {
+
+  background-color: #151d2d;
+
+}
+
+.btn12 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  font-size: 12px;
+  background-color: #3D4E6F;
+  font-family: 'PT Serif', serif;
+  color: white;
+  cursor: pointer;
+}
+
+.btn12:hover {
+
+  background-color: #151d2d;
+
+}
+
+.btn8 {
+  height: 18px;
+  display: flex;
+  flex-flow: row wrap;
+  padding-right: 4px;
+  padding-left: 4px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-right: 10px;
+  font-size: 12px;
+  background-color: transparent;
+  font-family: 'Architects Daughter', cursive;
+  color: white;
+  cursor: pointer;
+}
+
+.btn8:hover {
+
+  background-color: #cccccc;
+
+}
+
+.smallRow {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.smallColumn {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.btn9 {
+  height: 18px;
+  display: flex;
+  flex-flow: row wrap;
+  padding-right: 4px;
+  padding-left: 4px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  margin-right: 10px;
+  font-size: 12px;
+  background-color: transparent;
+  font-family: 'Architects Daughter', cursive;
+  color: black;
+  cursor: pointer;
+}
+
+.btn9:hover {
+
+  background-color: #cccccc;
+
+}
+
+#quotes {
+  min-height: 30px;
+  display: flex;
+  flex-flow: row wrap;
+  width: 15%;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: 12px;
+  font-family: 'PT Serif', serif;
+  font-size: 15px;
+  font-weight: bold;
+  color: black;
+  border: black solid 1.5px;
+}
+
+#quotebtn {
+  min-height: 30px;
+  display: flex;
+  flex-flow: row wrap;
+  width: 75%;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: 25px;
+  font-weight: bold;
+  background-color: #3D4E6F;
+  font-family: 'PT Serif', serif;
+  color: white;
+  cursor: pointer;
+}
+
+#quotes2 {
+  min-height: 30px;
+  display: flex;
+  flex-flow: row wrap;
+  width: 75%;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: 12px;
+  font-family: 'PT Serif', serif;
+  font-size: 15px;
+  font-weight: bold;
+  color: black;
+  border: black solid 1.5px;
+}
+
+#quotebtn2 {
+  min-height: 30px;
+  display: flex;
+  flex-flow: row wrap;
+  width: 15%;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: 25px;
+  font-weight: bold;
+  background-color: #3D4E6F;
+  font-family: 'PT Serif', serif;
+  color: white;
+  cursor: pointer;
+}
+
+#quotes3 {
+  min-height: 30px;
+  display: flex;
+  flex-flow: row wrap;
+  width: 75%;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: 12px;
+  font-family: 'PT Serif', serif;
+  font-size: 15px;
+  font-weight: bold;
+  color: black;
+  border: black solid 1.5px;
+}
+
+#quotebtn3 {
+  min-height: 30px;
+  display: flex;
+  flex-flow: row wrap;
+  width: 15%;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: 25px;
+  font-weight: bold;
+  background-color: #3D4E6F;
+  font-family: 'PT Serif', serif;
+  color: white;
+  cursor: pointer;
+}
+
+#quotebtn3:hover {
+
+  background-color: #151d2d;
+
+}
+
+#quotes4 {
+  display: flex;
+  flex-flow: row wrap;
+  width: 75%;
+  height: 100px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: 12px;
+  font-family: 'PT Serif', serif;
+  font-size: 15px;
+  font-weight: bold;
+  color: black;
+  border: black solid 1.5px;
+}
+
+#quotebtn4 {
+  min-height: 30px;
+  display: flex;
+  flex-flow: row wrap;
+  width: 15%;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: 25px;
+  font-weight: bold;
+  background-color: #3D4E6F;
+  font-family: 'PT Serif', serif;
+  color: white;
+  cursor: pointer;
+}
+
+#quotebtn4:hover {
+
+  background-color: #151d2d;
+
+}
+
+.btn2 {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: 12px;
+  background-color: #1691BA;
+  font-family: 'PT Serif', serif;
+  color: white;
+  cursor: pointer;
+}
+
+.scriptureHeading {
+  font-family: 'PT Serif', serif;
+  color: #3d4e6f;
+  font-weight:bold;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.lowercase {
+  font-family: serif;
+  color: #3d4e6f;
+  font-weight:lighter;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.outline {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.blurb {
+  font-family: serif;
+  color: #1691BA;
+  font-weight:lighter;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.btn2:hover {
+  color: #195e75;
+  background-color: white;
+  border: solid black 2px;
+}
+
+.btn22 {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: 12px;
+  background-color: #195e75;
+  border: solid black 2px;
+  font-family: 'PT Serif', serif;
+  color: white;
+  cursor: pointer;
+}
+
+.btn22:hover {
+  color: #195e75;
+  background-color: white;
+}
+
+.lessonInput {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.formInput {
+  width: 20px;
+  height: 20px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.btn19 {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
+  height: 25px;
+  margin-left: 5px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: 12px;
+  background-color: #1691BA;
+  font-family: 'PT Serif', serif;
+  color: white;
+  cursor: pointer;
+}
+
+.btn19:hover {
+  background-color: #195e75;
+}
+
+
+
+.displayIt {
+  z-index: 10;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 90vh;
+}
+
+.letter {
+  transition-duration: 1s;
+  -webkit-transform: translateY(90vh);
+    transform: translateY(90vh);
+  transition-timing-function: cubic-bezier(0.64, 0.57, 0.67, 1.53);
+color: #fffbdd;
+font-size: 75px;
+font-family: 'Architects Daughter', cursive;
+font-weight: bold;
+height: 50px;
+    -webkit-animation: boing .5s ease-in-out infinite alternate;
+}
+
+@keyframes boing {
+    0% {
+        transform: scale(1.0);
+        transition-timing-function: cubic-bezier(0.64, 0.57, 0.67, 1.53);
+    }
+    100% {
+
+        transform: scale(1.15);
+        transition-timing-function: cubic-bezier(0.64, 0.57, 0.67, 1.53);
+    }
+}
+
+.noDisplay {
+  display: none;
+}
+
+#loading {
+  margin-left: 5px;
+}
+
+.btn6 {
+  transition-timing-function: cubic-bezier(0.64, 0.57, 0.67, 1.53);
+transition-duration: 1s;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 170px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: 12px;
+  background-color: #1691BA;
+  font-family: 'PT Serif', serif;
+  color: white;
+  cursor: pointer;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.btn6:hover {
+  transition-timing-function: cubic-bezier(0.64, 0.57, 0.67, 1.53);
+transition-duration: 1s;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 170px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: 12px;
+  background-color: #195e75;
+  font-family: 'PT Serif', serif;
+  color: white;
+  cursor: pointer;
+  white-space:normal;
+  overflow:visible;
+  text-align:left;
+}
+
+.btn7 {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: 12px;
+  background-color: #1691BA;
+  font-family: 'PT Serif', serif;
+  color: white;
+  cursor: pointer;
+}
+
+.btn13 {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  font-size: 12px;
+  background-color: #1691BA;
+  font-family: 'PT Serif', serif;
+  color: white;
+  cursor: pointer;
+}
+
+.lessonNumber {
+  min-height: 30px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  width: 100%;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  margin-top: 2px;
+  margin-bottom: 2px;
+}
+
+.chapters {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.btn3 {
+  text-align: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  width: 15px;
+  height: 15px;
+  margin: 2px;
+  font-size: 10px;
+  background-color: #F3F3F3;
+  font-family: 'PT Serif', serif;
+  color: black;
+  cursor: pointer;
+}
+
+.btn3:hover {
+  color: white;
+  background-color: #969696;
+  border: solid black 1px;
+
+}
+
+.btn33 {
+  text-align: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  width: 15px;
+  height: 15px;
+  margin: 2px;
+  font-size: 10px;
+  background-color: #3a3a3a;
+  font-family: 'PT Serif', serif;
+  color: white;
+  cursor: pointer;
+}
+
+.btn33:hover {
+  color: white;
+  background-color: #969696;
+  border: solid black 1px;
+
+}
+
+.btn4 {
+  text-align: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  margin: 2px;
+  font-size: 13px;
+  background-color: #F3F3F3;
+  font-family: 'PT Serif', serif;
+  color: black;
+  cursor: pointer;
+}
+
+.btn4:hover {
+  color: white;
+  background-color: #969696;
+  border: solid black 1px;
+}
+
+.btn44 {
+  text-align: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  margin: 2px;
+  font-size: 13px;
+  background-color: #3a3a3a;
+  font-family: 'PT Serif', serif;
+  color: white;
+  cursor: pointer;
+}
+
+.btn44:hover {
+  color: white;
+  background-color: #969696;
+  border: solid black 1px;
+}
+
+.sidepanel {
+  position: fixed;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  border-right: solid black 2px;
+  width: 15%;
+  max-width: 180px;
+  background-color: white;
+  overflow-y: scroll;
+  height: 100%;
+}
+
+.content {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 90%;
+  margin-left: 14%;
+  height: 100%;
+  overflow: scroll;
+}
+
+.scripture {
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+  font-family: 'Architects Daughter', cursive;
+  padding-bottom: 10px;
+  padding-top: 15px;
+}
+
+.container {
+  width: 90%;
+  padding-bottom: 15px;
+  border-bottom: dashed #fffbdd 1.5px;
+}
+
+.container2 {
+  height: 90%;
+  width: 350px;
+  padding-right: 15px;
+  padding-left: 15px;
+  border-right: dashed #fffbdd 1.5px;
+}
+
+.container3 {
+  width: 90%;
+  padding-bottom: 15px;
+  border-bottom: dashed black 1.5px;
+}
+
+.verseText {
+  font-size: 35px;
+  color: white;
+  font-family: 'Architects Daughter', cursive;
+  padding-bottom: 15px;
+}
+
+.chalkboard {
+  background-image: url("chalk.jpeg");
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.verses {
+  display: flex;
+  flex-flow: row wrap;
+  padding-left: 20px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.verses2 {
+  display: flex;
+  flex-flow: row nowrap;
+  padding-left: 20px;
+  justify-content: space-around;
+  align-items: flex-start;
+  height: 100%;
+  overflow-x: scroll;
+}
+
+.verses3 {
+  display: flex;
+  flex-flow: row wrap;
+  padding-left: 20px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}
+
+#contentButtons {
+  display: flex;
+  flex-flow: column nowrap;
+  padding-left: 10px;
+  padding-right: 10px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+  height: 10%;
+  background-color: white;
+  border-bottom: black solid 1.5px;
+}
+
+.btnContainer {
+  display: flex;
+  flex-flow: row wrap;
+  padding-left: 10px;
+  padding-right: 10px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.btnContainer1{
+  font-size: 15px;
+  font-weight: bold;
+  color: #3D4E6F;
+  font-family: 'PT Serif', serif;
+  display: flex;
+  flex-flow: row wrap;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}

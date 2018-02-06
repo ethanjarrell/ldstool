@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>The Creation</title>
+    <link rel="stylesheet" href="/home.css">
+    <link href="https://fonts.googleapis.com/css?family=PT+Serif:700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Architects+Daughter|Gloria+Hallelujah" rel="stylesheet">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+    $(window).load(function() {
+
+
+      let loading = document.getElementById('loading');
+      let inputForm = `
+      <div class="lessonInput">
+      <input id="formInput" class="formInput" placeholder="lesson#">
+      <button id="formBtn" class="btn19" type="submit">› › › ›</button>
+      </div>
+      `;
+
+      loading.innerHTML = inputForm;
+      let gdBtn = document.getElementById('formBtn');
+      gdBtn.onclick = begin;
+
+      function begin(){
+      let gdn = document.getElementById('formInput').value;
+
+        fetch('https://api.mlab.com/api/1/databases/presentation-maker/collections/ldsScriptures?&l=41994&apiKey=T_4ma8aw6AyAhVzAcfzCpxEKDJqxffrn').then(function(response) {
+          if (response.status != 200) {
+            window.alert("Sorry, nothing matches those search terms.  Try another search, or use the panel on the left.");
+            return;
+          }
+
+          response.json().then(function(data) {
+            let api = data;
+
+
+
+            return fetch('https://api.mlab.com/api/1/databases/gospeldoctrine/collections/quotes?&apiKey=T_4ma8aw6AyAhVzAcfzCpxEKDJqxffrn').then(function(response) {
+                            if (response.status != 200) {
+                                window.alert("Sorry, nothing matches those search terms.  Try another search, or use the panel on the left.");
+                                return;
+                            }
+
+                              response.json().then(function(data) {
+
+                                let quotes = data;
+
+
+            return fetch('https://api.mlab.com/api/1/databases/gospeldoctrine/collections/scriptures?&apiKey=T_4ma8aw6AyAhVzAcfzCpxEKDJqxffrn').then(function(response) {
+                            if (response.status != 200) {
+                                window.alert("Sorry, nothing matches those search terms.  Try another search, or use the panel on the left.");
+                                return;
+                            }
+
+                              response.json().then(function(data) {
+
+            let scriptData = data;
+            console.log(scriptData);
+            let script = [];
+            let arrays = [];
+            let blurb = [];
+            for (var i = 0; i < scriptData.length; i++) {
+              if(scriptData[i].lesson == gdn){
+                arrays = scriptData[i].reference;
+                blurb = scriptData[i].blurb;
+                }
+              }
+              console.log(arrays);
+              console.log(blurb);
+
+
+            let ldsBook = [];
+            let splitBook = [];
+
+            for (var i = 0; i < arrays.length; i++) {
+              let split = arrays[i].split(":");
+              splitBook.push(split);
+            }
+
+            for (var i = 0; i < splitBook.length; i++) {
+              let count = (splitBook[i][0].match(/ /g) || []).length;
+              let arr = splitBook[i][0].split(" ");
+              let book = "";
+              let chapter = "";
+              let verse = splitBook[i][1];
+              if(count == 1){
+                book = arr[0];
+                chapter = arr[1];
+              }
+              else if(count == 2){
+                book = arr[0]+" "+arr[1];
+                chapter = arr[2];
+              }
+              let obj = {
+                "book" : book,
+                "chapter" : chapter,
+                "verse" : verse
+              }
+              ldsBook.push(obj);
+            }
+
+            for (var i = 0; i < ldsBook.length; i++) {
+              for (var k = 0; k < scriptData.length; k++) {
+                let verse = ""+ldsBook[i].book+" "+ldsBook[i].chapter+":"+ldsBook[i].verse+"";
+
+
+                if(scriptData[k].reference.includes(verse)==true ) {
+                  ldsBook[i] = {
+                    "book" : ldsBook[i].book,
+                    "chapter" : ldsBook[i].chapter,
+                    "verse" : ldsBook[i].verse,
+                    "blurb" : scriptData[k].blurb,
+                  }
+                }
+            }
+          }
+
+
+
+            let quoteInput = document.getElementById('quotes');
+            let quoteBtn = document.getElementById('quotebtn');
+            quoteBtn.onclick = searchQuotes;
+
+            let quoteInput2 = document.getElementById('quotes2');
+            let quoteBtn2 = document.getElementById('quotebtn2');
+            quoteBtn2.onclick = searchQuote2;
+
+            let quoteInput3 = document.getElementById('quotes3');
+            let quoteBtn3 = document.getElementById('quotebtn3');
+            quoteBtn3.onclick = searchQuote3;
+
+            let quoteInput4 = document.getElementById('quotes4');
+            let quoteBtn4 = document.getElementById('quotebtn4');
+            quoteBtn4.onclick = searchQuote4;
+
+
+
+            function searchQuote4 () {
+              let currentQuote = [];
+              let input = document.getElementById('quotes4');
+              for (var i = 0; i < quotes.length; i++) {
+                let val3 = input.value;
+                let val2 = val3.toLowerCase();
+                let value = val2.replace(/ /g, '');
+                let text3 = quotes[i].text;
+                let text2 = text3.toLowerCase();
+                let text = text2.replace(/ /g, '');
+
+
+
+                if (text.indexOf(value) >= 0) {
+                  currentQuote.push([quotes[i], i]);
+                }
+
+              }
+
+              for (var i = 0; i < currentQuote.length; i++) {
+                currentQuote[i] = `
+                <button id="id_${currentQuote[i][1]}" class="btn7">${currentQuote[i][0].author}-${currentQuote[i][0].tags}</button>
+                `;
+                document.getElementById('quotesContent4').innerHTML += currentQuote[i];
+              }
+            }
+
+            function searchQuote3 () {
+              let currentQuote = [];
+              let input = document.getElementById('quotes3');
+              for (var i = 0; i < quotes.length; i++) {
+                let val3 = input.value;
+                let val2 = val3.toLowerCase();
+                let value = val2.replace(/ /g, '');
+                let author3 = quotes[i].author;
+                let author2 = author3.toLowerCase();
+                let author = author2.replace(/ /g, '');
+
+
+
+                if (author.indexOf(value) >= 0) {
+                  currentQuote.push([quotes[i], i]);
+                }
+
+              }
+
+              for (var i = 0; i < currentQuote.length; i++) {
+                currentQuote[i] = `
+                <button id="id_${currentQuote[i][1]}" class="btn7">${currentQuote[i][0].author}-${currentQuote[i][0].tags}</button>
+                `;
+
+                document.getElementById('quotesContent3').innerHTML += currentQuote[i];
+              }
+            }
+
+            function searchQuote2 () {
+              let currentQuote = [];
+              let input = document.getElementById('quotes2');
+              for (var i = 0; i < quotes.length; i++) {
+                let val3 = input.value;
+                let val2 = val3.toLowerCase();
+                let value = val2.replace(/ /g, '');
+                let tags = quotes[i].tags;
+                let string = tags.toString();
+                let nospace = string.replace(/ /g, '');
+                let array = nospace.split(",");
+                if (array.includes(value) == true) {
+                  currentQuote.push([quotes[i], i]);
+                }
+
+              }
+
+              for (var i = 0; i < currentQuote.length; i++) {
+                currentQuote[i] = `
+                <button id="id_${currentQuote[i][1]}" class="btn7">${currentQuote[i][0].author}-${currentQuote[i][0].tags}</button>
+                `;
+
+                document.getElementById('quotesContent2').innerHTML += currentQuote[i];
+              }
+            }
+
+            function searchQuotes () {
+
+              let currentQuotes = [];
+              let lessonNum = quoteInput.value;
+
+              for (var i = 0; i < quotes.length; i++) {
+                if(quotes[i].lesson == lessonNum){
+                  currentQuotes.push(quotes[i]);
+
+                }
+              }
+
+
+              for (var i = 0; i < currentQuotes.length; i++) {
+                let length = 200;
+                let snippet = currentQuotes[i].text;
+                let truncated = snippet.substring(0,length);
+                let snip = truncated+".....";
+                currentQuotes[i] = `
+                <button id="id_${currentQuotes[i].lesson}_${i}" class="btn6">${currentQuotes[i].author}-${snip}</button>
+                `
+                document.getElementById('quotesContent').innerHTML += currentQuotes[i];
+              }
+            }
+
+
+
+            $(document).on('click', '.btn6', function () {
+              let currentQuote = [];
+              let id = this.id;
+              let currentId = id.split("_");
+              let lessonNumber = parseInt(currentId[1]);
+              let idNumber = parseInt(currentId[2]);
+              for (var i = 0; i < quotes.length; i++) {
+                if(i == idNumber ) {
+                  currentQuote.push(quotes[i]);
+                }
+              }
+
+              for (var i = 0; i < currentQuote.length; i++) {
+                currentQuote[i] = `
+                <span class="container">
+                <h1 class="scripture">${currentQuote[i].author} - ${currentQuote[i].talk_reference}</h1>
+                <p class="verseText">${currentQuote[i].text}</p>
+                </span>
+                `
+              document.getElementById('verseText').innerHTML += currentQuote[i];
+              }
+            });
+
+            $(document).on('click', '.btn7', function () {
+              let currentQuote = [];
+              let id = this.id;
+              let currentId = id.split("_");
+              let idNumber = parseInt(currentId[1]);
+              let disregard = parseInt(currentId[0]);
+              for (var i = 0; i < quotes.length; i++) {
+                if(i == idNumber ) {
+                  currentQuote.push(quotes[i]);
+                }
+              }
+
+              for (var i = 0; i < currentQuote.length; i++) {
+                currentQuote[i] = `
+                <span class="container">
+                <h1 class="scripture">${currentQuote[i].author} - ${currentQuote[i].talk_reference}</h1>
+                <p class="verseText">${currentQuote[i].text}</p>
+                </span>
+                `
+              document.getElementById('verseText').innerHTML += currentQuote[i];
+              }
+            });
+
+            let oldtestament = document.getElementById('oldTestament');
+            let newtestament = document.getElementById('newTestament');
+            let bookofmormon = document.getElementById('bookOfMormon');
+            let pearlofgreatprice = document.getElementById('pearlOfGreatPrice');
+            let doctrineandcovenants = document.getElementById('dandC');
+
+            oldtestament.onclick = otSearch;
+            newtestament.onclick = ntSearch;
+            bookofmormon.onclick = bomSearch;
+            pearlofgreatprice.onclick = pgpSearch;
+            doctrineandcovenants.onclick = dcSearch;
+          function otSearch () {
+            $('#search1').hide();
+            $('#search2').hide();
+            $('#search3').hide();
+            $('#search4').hide();
+
+            if( (document.getElementById('otContent').innerHTML == "") == true){
+            let oldT = [];
+            for (var i = 0; i < api.length; i++) {
+              if (api[i].volume_short_title == "OT" &&
+                  oldT.includes(api[i].book_title) == false){
+                oldT.push(api[i].book_title);
+              }
+            }
+            oldT.sort()
+            for (var i = 0; i < oldT.length; i++) {
+
+              oldT[i] = `
+              <button id="${oldT[i]}" class="btn2">${oldT[i]}</button>
+              <div class="chapters" id="chapterHolder${oldT[i]}"></div>
+              `
+
+              document.getElementById('otContent').innerHTML += oldT[i];
+              }
+            }
+            else if ( (document.getElementById('otContent').innerHTML == "") == false){
+              document.getElementById('otContent').innerHTML = "";
+              }
+
+            let btns = $('.btn2');
+            for (var i = 0; i < btns.length; i++) {
+              for (var k = 0; k < ldsBook.length; k++) {
+              if (ldsBook[k].book == btns[i].id){
+                btns[i].className = "btn22";
+                }
+              }
+            }
+
+          }
+
+
+
+
+          function ntSearch () {
+            $('#search1').hide();
+            $('#search2').hide();
+            $('#search3').hide();
+            $('#search4').hide();
+            if( (document.getElementById('ntContent').innerHTML == "") == true){
+            let newT = [];
+            for (var i = 0; i < api.length; i++) {
+              if (api[i].volume_short_title == "NT" &&
+                  newT.includes(api[i].book_title) == false){
+                newT.push(api[i].book_title);
+              }
+            }
+              newT.sort()
+            for (var i = 0; i < newT.length; i++) {
+              newT[i] = `
+              <button id="${newT[i]}" class="btn2">${newT[i]}</button>
+              <div class="chapters" id="chapterHolder${newT[i]}"></div>
+              `
+              document.getElementById('ntContent').innerHTML += newT[i];
+            }
+          }
+          else if( (document.getElementById('ntContent').innerHTML == "") == false){
+            document.getElementById('ntContent').innerHTML = "";
+          }
+
+          let btns = $('.btn2');
+          for (var i = 0; i < btns.length; i++) {
+            for (var k = 0; k < ldsBook.length; k++) {
+            if (ldsBook[k].book == btns[i].id){
+              btns[i].className = "btn22";
+              }
+            }
+          }
+
+        }
+
+          function bomSearch () {
+            $('#search1').hide();
+            $('#search2').hide();
+            $('#search3').hide();
+            $('#search4').hide();
+            if( (document.getElementById('bofmContent').innerHTML == "") == true){
+            let bOfM = [];
+            for (var i = 0; i < api.length; i++) {
+              if (api[i].volume_short_title == "BoM" &&
+                  bOfM.includes(api[i].book_title) == false){
+                bOfM.push(api[i].book_title);
+              }
+            }
+            bOfM.sort()
+            for (var i = 0; i < bOfM.length; i++) {
+              bOfM[i] = `
+              <button id="${bOfM[i]}" class="btn2">${bOfM[i]}</button>
+              <div class="chapters" id="chapterHolder${bOfM[i]}"></div>
+              `
+              document.getElementById('bofmContent').innerHTML += bOfM[i];
+            }
+          }
+          else if( (document.getElementById('bofmContent').innerHTML == "") == false){
+            document.getElementById('bofmContent').innerHTML = "";
+          }
+
+          let btns = $('.btn2');
+          for (var i = 0; i < btns.length; i++) {
+            for (var k = 0; k < ldsBook.length; k++) {
+            if (ldsBook[k].book == btns[i].id){
+              btns[i].className = "btn22";
+              }
+            }
+          }
+        }
+
+          function pgpSearch () {
+            $('#search1').hide();
+            $('#search2').hide();
+            $('#search3').hide();
+            $('#search4').hide();
+            if( (document.getElementById('pgpContent').innerHTML == "") == true){
+            let pofGP = [];
+            for (var i = 0; i < api.length; i++) {
+              if (api[i].volume_short_title == "PGP" &&
+                  pofGP.includes(api[i].book_title) == false){
+                pofGP.push(api[i].book_title);
+              }
+            }
+            pofGP.sort()
+            for (var i = 0; i < pofGP.length; i++) {
+              pofGP[i] = `
+              <button id="${pofGP[i]}" class="btn2">${pofGP[i]}</button>
+              <div class="chapters" id="chapterHolder${pofGP[i]}"></div>
+              `
+              document.getElementById('pgpContent').innerHTML += pofGP[i];
+            }
+          }
+          else if( (document.getElementById('pgpContent').innerHTML == "") == false){
+            document.getElementById('pgpContent').innerHTML = "";
+          }
+
+          let btns = $('.btn2');
+          for (var i = 0; i < btns.length; i++) {
+            for (var k = 0; k < ldsBook.length; k++) {
+            if (ldsBook[k].book == btns[i].id){
+              btns[i].className = "btn22";
+              }
+            }
+          }
+        }
+
+          function dcSearch () {
+            $('#search1').hide();
+            $('#search2').hide();
+            $('#search3').hide();
+            $('#search4').hide();
+            if( (document.getElementById('dcContent').innerHTML == "") == true){
+            let dAndC = [];
+            for (var i = 0; i < api.length; i++) {
+              if (api[i].volume_short_title == "D&C" &&
+                  dAndC.includes(api[i].book_title) == false){
+                dAndC.push(api[i].book_title);
+              }
+            }
+
+            for (var i = 0; i < dAndC.length; i++) {
+              dAndC[i] = `
+              <button id="${dAndC[i]}" class="btn2">${dAndC[i]}</button>
+              <div class="chapters" id="chapterHolder${dAndC[i]}"></div>
+              `
+              document.getElementById('dcContent').innerHTML += dAndC[i];
+            }
+          }
+          else if((document.getElementById('dcContent').innerHTML == "") == true){
+            document.getElementById('dcContent').innerHTML = "";
+          }
+
+          let btns = $('.btn2');
+          for (var i = 0; i < btns.length; i++) {
+            for (var k = 0; k < ldsBook.length; k++) {
+            if (ldsBook[k].book == btns[i].id){
+              btns[i].className = "btn22";
+              }
+            }
+          }
+        }
+          $(document).on('click', '.btn2', function () {
+
+            let currentChapters = [];
+            let bookContent = [];
+            let currentId = "";
+            for (var i = 0; i < api.length; i++) {
+              if(api[i].book_title == this.id &&
+                 currentChapters.includes(api[i].chapter_number) == false) {
+                currentChapters.push(api[i].chapter_number);
+                bookContent.push(api[i]);
+                currentId = "chapterHolder"+this.id;
+              }
+            }
+
+            for (var i = 0; i < bookContent.length; i++) {
+              bookContent[i] = `
+              <button class="btn3" id="${bookContent[i].book_title}${bookContent[i].chapter_number}">
+              ${bookContent[i].chapter_number}
+              </button>
+              `
+            document.getElementById(currentId).innerHTML += bookContent[i];
+            }
+
+          });
+
+          $(document).on('click', '.btn22', function () {
+
+            let currentChapters = [];
+            let bookContent = [];
+            let currentId = "";
+            for (var i = 0; i < api.length; i++) {
+              if(api[i].book_title == this.id &&
+                 currentChapters.includes(api[i].chapter_number) == false) {
+                currentChapters.push(api[i].chapter_number);
+                bookContent.push(api[i]);
+                currentId = "chapterHolder"+this.id;
+              }
+            }
+
+            for (var i = 0; i < bookContent.length; i++) {
+              bookContent[i] = `
+              <button class="btn3" id="${bookContent[i].book_title}${bookContent[i].chapter_number}">
+              ${bookContent[i].chapter_number}
+              </button>
+              `
+            document.getElementById(currentId).innerHTML += bookContent[i];
+            }
+            let btns = $('.btn3');
+            for (var i = 0; i < btns.length; i++) {
+              for (var k = 0; k < ldsBook.length; k++) {
+                let book = ldsBook[k].book+ldsBook[k].chapter;
+                if(btns[i].id == book){
+                  btns[i].className = "btn33";
+                }
+              }
+            }
+
+
+          });
+
+
+          let containerID = "";
+          $(document).on('click', '.btn3', function () {
+            let currentVerses = [];
+            for (var i = 0; i < api.length; i++) {
+              let chapterID = api[i].book_title+api[i].chapter_number;
+              if (chapterID == this.id) {
+                currentVerses.push(api[i]);
+                containerID = chapterID;
+              }
+            }
+
+            let buttonContainer = document.createElement('div');
+            buttonContainer.id = containerID;
+            document.body.appendChild(buttonContainer);
+            document.getElementById('contentButtons').appendChild(buttonContainer);
+            buttonContainer.className = 'btnContainer1';
+
+            let buttons = document.createElement('div');
+            buttons.id = ""+containerID+"1";
+            document.body.appendChild(buttons);
+            document.getElementById('contentButtons').appendChild(buttons);
+            buttons.className = 'btnContainer';
+
+
+            let currentBook = "";
+            let currentChapter = "";
+            for (var i = 0; i < currentVerses.length; i++) {
+              currentBook = currentVerses[i].book_title;
+              currentChapter = currentVerses[i].chapter_number;
+              currentVerses[i] = `
+              <button class="btn4" id="${currentVerses[i].chapter_number}${currentVerses[i].book_title}${currentVerses[i].verse_number}">
+              ${currentVerses[i].verse_number}
+              </button>
+              `
+
+              buttons.innerHTML += currentVerses[i];
+            }
+            buttonContainer.innerHTML = currentBook+" "+currentChapter;
+
+
+          });
+
+          $(document).on('click', '.btn33', function () {
+            let currentVerses = [];
+            for (var i = 0; i < api.length; i++) {
+              let chapterID = api[i].book_title+api[i].chapter_number;
+              if (chapterID == this.id) {
+                currentVerses.push(api[i]);
+                containerID = chapterID;
+              }
+            }
+
+            let buttonContainer = document.createElement('div');
+            buttonContainer.id = containerID;
+            document.body.appendChild(buttonContainer);
+            document.getElementById('contentButtons').appendChild(buttonContainer);
+            buttonContainer.className = 'btnContainer1';
+
+            let buttons = document.createElement('div');
+            buttons.id = ""+containerID+"1";
+            document.body.appendChild(buttons);
+            document.getElementById('contentButtons').appendChild(buttons);
+            buttons.className = 'btnContainer';
+
+
+            let currentBook = "";
+            let currentChapter = "";
+            for (var i = 0; i < currentVerses.length; i++) {
+              currentBook = currentVerses[i].book_title;
+              currentChapter = currentVerses[i].chapter_number;
+              currentVerses[i] = `
+              <button class="btn4" id="${currentVerses[i].chapter_number}${currentVerses[i].book_title}${currentVerses[i].verse_number}">
+              ${currentVerses[i].verse_number}
+              </button>
+              `
+
+              buttons.innerHTML += currentVerses[i];
+            }
+            buttonContainer.innerHTML = currentBook+" "+currentChapter;
+
+            let scriptureBlurb = [];
+            let scriptureRef = [];
+            for (var i = 0; i < arrays.length; i++) {
+            let bcComp = arrays[i];
+            let innerComp = buttonContainer.innerHTML;
+            str1 = bcComp.replace(/\s/g, '');
+            str2 = innerComp.replace(/\s/g, '');
+            console.log(str1);
+            console.log(str2);
+              if(str1.includes(str2)==true){
+                scriptureBlurb.push([arrays[i], blurb[i]])
+              }
+            }
+
+            console.log(scriptureBlurb);
+
+            for (var i = 0; i < scriptureBlurb.length; i++) {
+              scriptureBlurb[i]
+
+            let input = `
+            <p class="scriptureHeading"> / ${scriptureBlurb[i][0]} - <span class=lowercase>${scriptureBlurb[i][1]}</span>  /  </p>
+            `
+            buttonContainer.innerHTML += input;
+          }
+
+            let btns = $('.btn4');
+            for (var i = 0; i < btns.length; i++) {
+              for (var k = 0; k < ldsBook.length; k++) {
+                let scrID = ldsBook[k].chapter+ldsBook[k].book+ldsBook[k].verse;
+
+                if(btns[i].id == scrID){
+                  btns[i].className = 'btn44';
+                }
+              }
+            }
+
+          });
+
+          $(document).on('click', '.btn4', function () {
+            let currentVerses = [];
+            for (var i = 0; i < api.length; i++) {
+            let verseID = api[i].chapter_number+api[i].book_title+api[i].verse_number;
+            if (verseID == this.id) {
+              currentVerses.push(api[i])
+            }
+          }
+
+          for (var i = 0; i < currentVerses.length; i++) {
+            currentVerses[i] = `
+            <span class="container">
+            <h1 class="scripture">${currentVerses[i].book_title}  ${currentVerses[i].chapter_number} : ${currentVerses[i].verse_number}</h1>
+            <p class="verseText">${currentVerses[i].scripture_text}</p>
+            </span>
+            `
+document.getElementById('verseText').innerHTML += currentVerses[i];
+
+          }
+
+                  });
+                  $(document).on('click', '.btn44', function () {
+                    let currentVerses = [];
+                    for (var i = 0; i < api.length; i++) {
+                    let verseID = api[i].chapter_number+api[i].book_title+api[i].verse_number;
+                    if (verseID == this.id) {
+                      currentVerses.push(api[i])
+                    }
+                  }
+
+                  for (var i = 0; i < currentVerses.length; i++) {
+                    currentVerses[i] = `
+                    <span class="container">
+                    <h1 class="scripture">${currentVerses[i].book_title}  ${currentVerses[i].chapter_number} : ${currentVerses[i].verse_number}</h1>
+                    <p class="verseText">${currentVerses[i].scripture_text}</p>
+                    </span>
+                    `
+        document.getElementById('verseText').innerHTML += currentVerses[i];
+
+                  }
+
+                          });
+
+                })
+              })
+            })
+          })
+        })
+      })
+    }
+  })
+    </script>
+    <script>
+    $(document).ready(function() {
+      $('#clear').click(function(){
+      $('.btnContainer').html("");
+      $('.btnContainer1').html("");
+
+        $('#verseText').removeClass('verses2');
+        $('#verseText').removeClass('verses3');
+        $('#verseText').addClass('verses');
+        $('span').removeClass('container2');
+        $('span').removeClass('container3');
+        $('span').addClass('container');
+      });
+      $('#erase').click(function(){
+        let content = document.getElementById('verseText');
+        content.innerHTML = "";
+        $('#verseText').removeClass('verses2');
+        $('#verseText').removeClass('verses3');
+        $('#verseText').addClass('verses');
+        $('span').removeClass('container2');
+        $('span').removeClass('container3');
+        $('span').addClass('container');
+      });
+      $('#compare1').click(function(){
+        $('#verseText').removeClass('verses2');
+        $('#verseText').removeClass('verses3');
+        $('#verseText').addClass('verses');
+        $('span').removeClass('container2');
+        $('span').removeClass('container3');
+        $('span').addClass('container');
+      });
+      $('#compare2').click(function(){
+        $('#verseText').removeClass('verses');
+        $('#verseText').removeClass('verses3');
+        $('#verseText').addClass('verses2');
+        $('span').removeClass('container');
+        $('span').removeClass('container3');
+        $('span').addClass('container2');
+      });
+    });
+    </script>
+    <script>
+    $(window).load(function(){
+      $('#search1').hide();
+      $('#search2').hide();
+      $('#search3').hide();
+      $('#search4').hide();
+    });
+    </script>
+    <script>
+    $(document).ready(function(){
+      $('#lessonNumberBtn').click(function(){
+        $('#search1').show();
+        $('#search2').hide();
+        $('#search3').hide();
+        $('#search4').hide();
+      });
+      $('#topicBtn').click(function(){
+        $('#search2').show();
+        $('#search1').hide();
+        $('#search3').hide();
+        $('#search4').hide();
+      });
+      $('#authorBtn').click(function(){
+        $('#search3').show();
+        $('#search1').hide();
+        $('#search2').hide();
+        $('#search4').hide();
+      });
+      $('#textBtn').click(function(){
+        $('#search4').show();
+        $('#search1').hide();
+        $('#search2').hide();
+        $('#search3').hide();
+      });
+    });
+    </script>
+    <script>
+    $(document).ready(function(){
+      let formBtn = document.getElementById('displayForm');
+      formBtn.onclick = createForm;
+
+      function createForm(){
+
+        let form = `
+        <div
+        <div class="formContainer">
+          <div class="scriptureInput">
+          <h3>Add scriptures to lesson</h3>
+          <div class="labelContainer">
+          <label>single input example: </label>
+          <label class="sanserif"> - Moses 1:39</label>
+          <label>multiple consecutive verses: </label>
+          <label class="sanserif"> - Moses 1:23-39</label>
+          <label>multiple, non-consecutive verses:</label>
+          <label class="sanserif"> - Moses 1:22,23,39</label>
+          </div>
+          <div class="rowInput">
+          <label>Scripture Reference</label>
+          <input class="newScript" id="scripture1" />
+          <input id="textarea1" class="newScript" placeholder="this is about...." name="blurb" />
+          <button id="addToForm">»</button>
+          </div>
+
+          <form id="newInputs" action="/scripturecreate" method="post">
+          <div id="insideForm">
+          </div>
+          <div class="smallColumn">
+          <div class="smallRow">
+          <label>Scripture Summary</label>
+
+          </div>
+          <div class="smallRow">
+          <label>Lesson Number</label>
+          <input class="newScript2" placeholder="lesson #" name="lesson" />
+          </div>
+          </div>
+          <button class="btn09" type="submit" id="submitInput">add to lesson</button>
+          </form>
+
+          </div>
+
+          <div class="quoteInput">
+          <h3>Add quotes to lesson</h3>
+          <form id="newInputs2" action="/quotecreate" method="post">
+          <label> lesson Number </label>
+          <input name="lesson" />
+          <label> date of quote </label>
+          <input name="date" />
+          <label> date of quote </label>
+          <input name="date" />
+          <label> quote author </label>
+          <input name="author" />
+          <label> source of quote </label>
+          <input name="talk_reference" />
+          <label> quote text </label>
+          <textarea name="text" ></textarea>
+          <label> tags (separate by commas) </label>
+          <input name="tags" />
+
+          <button class="btn09" type="submit" id="submitInput">add to lesson</button>
+          </form>
+          </div>
+        </div>
+        `
+
+        document.getElementById('content3').innerHTML = form;
+        $('#scripture1').on('input', function() {
+          let value2 = document.getElementById('scripture1');
+          let value = value2.value;
+          let separate = value.split(':');
+          let txt2 = document.getElementById('textarea1');
+          let txt1 = txt2.value;
+          console.log(txt1);
+
+          let verses = separate[1];
+
+          let dash = "-";
+          let comma = ",";
+          let consecutive = [];
+          let reference = [];
+          if(verses.includes(dash)==true){
+            consecutive = verses.split("-");;
+
+            let firstNumber = parseInt(consecutive[0]);
+            let lastNumber = parseInt(consecutive[1]);
+
+
+
+            let list = [];
+            for (var i = firstNumber; i <= lastNumber; i++) {
+              list.push(i);
+            }
+
+            for (var i = 0; i < list.length; i++) {
+              list[i] = separate[0]+":"+list[i];
+              reference.push(list[i]);
+            }
+          }
+
+          if(verses.includes(comma)==true){
+            let list = verses.split(",");
+
+            for (var i = 0; i < list.length; i++) {
+              list[i] = separate[0]+":"+list[i];
+              reference.push(list[i]);
+            }
+          }
+
+          if(verses.includes(comma)==false &&
+             verses.includes(dash)==false){
+
+              reference.push(value);
+            }
+
+            let finalInput = [];
+
+          for (var i = 0; i < reference.length; i++) {
+
+            let input = `
+              <input name="reference" class="newScript2" id="id_${i}" value="${reference[i]}" />
+            `;
+            let blurb = `
+              <input name="blurb" class="newScript2" id="id_${i}2" value="${txt1}" />
+            `;
+            let para = `
+              <div class="outline">
+              ${input}
+              ${blurb}
+              </div>
+            `
+            finalInput.push(para);
+            }
+            let addScriptures = document.getElementById('addToForm');
+            addScriptures.onclick = confirm;
+
+            function confirm () {
+              let confirm2 = `<h4>Add these scriptures to Lesson?</h4>`;
+              let div = document.getElementById('insideForm');
+              div.innerHTML += confirm2+finalInput;
+            }
+
+        });
+      };
+
+    });
+    </script>
+
+  </head>
+  <body>
+    <div id="sidepanel" class="sidepanel">
+
+      <button id="oldTestament" type="button" class="btn btn-info" data-toggle="collapse" data-target="#otContent">Old Testament</button>
+
+      <div id="otContent"></div>
+
+      <button id="newTestament" type="button" class="btn btn-info" data-toggle="collapse" data-target="#ntContent">New Testament</button>
+
+      <div id="ntContent"></div>
+
+      <button id="bookOfMormon" type="button" class="btn btn-info" data-toggle="collapse" data-target="#bomContent">Book of Mormon</button>
+
+      <div id="bofmContent"></div>
+
+      <button id="dandC" type="button" class="btn btn-info" data-toggle="collapse" data-target="#dcContent">Doctrine & Covenants</button>
+
+      <div id="dcContent"></div>
+
+      <button id="pearlOfGreatPrice" type="button" class="btn btn-info" data-toggle="collapse" data-target="#pgpContent">Pearl of Great Price</button>
+
+      <div id="pgpContent"></div>
+
+      <div class="smallRow">
+      <button class="btn12" id="lessonNumberBtn">L#</button>
+      <button class="btn12" id="topicBtn">TO</button>
+      <button class="btn12" id="authorBtn">AU</button>
+      <button class="btn12" id="textBtn">TE</button>
+      </div>
+
+      <div id="search1" class="lessonNumber">
+      <input id="quotes" placeholder="lesson#" />
+      <button id="quotebtn">› › › ›</button>
+      <div id="quotesContent"></div>
+    </div>
+
+    <div id="search2" class="lessonNumber">
+    <input id="quotes2" placeholder="topic" />
+    <button id="quotebtn2">›</button>
+    <div id="quotesContent2"></div>
+  </div>
+
+  <div id="search3" class="lessonNumber">
+  <input id="quotes3" placeholder="author" />
+  <button id="quotebtn3">›</button>
+  <div id="quotesContent3"></div>
+</div>
+
+<div id="search4" class="lessonNumber">
+<textarea id="quotes4" placeholder="text"></textarea>
+<button id="quotebtn4">›</button>
+<div id="quotesContent4"></div>
+</div>
+
+<button id="displayForm" type="button" class="btn">add new lesson</button>
+
+  </div>
+    <div id="content" class="content">
+
+      <div id="contentButtons">
+      <div id="controls">
+        <div class="btn9">clipboard</div>
+        <button id="clear">clear clipboard</button>
+        <button id="erase">erase chalkboard</button>
+        <button id="compare1">compare1</button>
+        <button id="compare2">compare2</button>
+        <div id="loading"></div>
+      </div>
+      </div>
+      <div class="chalkboard">
+      <div class="btn8">chalkboard</div>
+      <div class="verses" id="verseText"></div>
+      <div id="myLesson" class="noDisplay"></div>
+      <div id="content3"></div>
+      <div id="isItLoaded"></div>
+
+    </div>
+    </div>
+
+  </body>
+</html>
